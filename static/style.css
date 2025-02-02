@@ -1,0 +1,122 @@
+.form-control {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  transition: all 0.3s ease; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  outline: none; 
+}
+
+.form-control:focus {
+  transform: scale(1.02); 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
+
+.form-control {
+  background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 100%);
+  background-clip: padding-box;
+}
+
+.form-control:disabled {
+  background: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+
+button {
+    background: #000000;
+    border: none;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    width: 120px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: skew(-21deg);
+  }
+  
+  span {
+    display: inline-block;
+    transform: skew(21deg);
+  }
+  
+  button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    left: 0;
+    background: rgb(255 255 255);
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.5s;
+  }
+  
+  button:hover {
+    color: #000000;
+  }
+  
+  button:hover::before {
+    left: 0;
+    right: 0;
+    opacity: 1;
+  }
+
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    width: 100%;
+    max-width: 800px;
+    margin: 0; 
+    padding: 20px;
+    background-color: #1290ce;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    border-radius: 8px;
+    position: absolute; 
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.encode-btn, .decode-btn, .copy {
+    padding: 10px 20px;
+    margin: 0 10px 20px 10px; 
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.encode-btn:hover, .decode-btn:hover {
+    background-color: #0056b3;
+}
+
+#resultText {
+    height: 150px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>ba编码</title>
+</head>
+<style>
+    body{
+        background-image: url('{{ url_for('static', filename='img/bg.jpg') }}');
+        background-size: cover; 
+        background-repeat: no-repeat; 
+        background-position: center center; 
+    }
+</style>
+<body>
+    <div class="main hidden">
+        <div class="main">
+            <h1>Decode/Encode</h1>
+            <textarea id="textInput" placeholder="请输入需要加密/解密的内容" class="form-control" style="width:800px; height:200px;resize: none;"></textarea>
+            <div class="button-container">
+                <button type="button" class="encode-btn">编码</button>
+                <button type="button" class="decode-btn">解码</button>
+                <button type="button" id="copy-btn" class="copy">Copy</button>
+            </div>
+            <textarea id="resultText" readonly placeholder="结果将显示在这里" class="form-control" style="width:800px; height:200px;resize: none;"></textarea>
+        </div>
+    </div>
+  
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var mainElement = document.querySelector('.main');
+            mainElement.classList.remove('hidden');
+            setTimeout(function() {
+                mainElement.classList.add('visible');
+            }, 10); 
+        });
+        document.querySelector('.encode-btn').addEventListener('click', function() {
+            var text = document.getElementById('textInput').value;
+            fetch('/callapi', {
+                method: 'POST',
+                body: new URLSearchParams({ 'api': 'code', 'text': text }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.error) {
+                    document.getElementById('resultText').value = 'Error: ' + data.message;
+                } else {
+                    document.getElementById('resultText').value = data.result;
+                }
+            })
+            .catch(error => {
+                document.getElementById('resultText').value = 'Error: ' + error.message;
+            });
+        });
+
+        document.querySelector('.decode-btn').addEventListener('click', function() {
+            var text = document.getElementById('textInput').value;
+            fetch('/callapi', {
+                method: 'POST',
+                body: new URLSearchParams({ 'api': 'decode', 'text': text }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.error) {
+                    document.getElementById('resultText').value = 'Error: ' + data.message;
+                } else {
+                    document.getElementById('resultText').value = data.result;
+                }
+            })
+            .catch(error => {
+                document.getElementById('resultText').value = 'Error: ' + error.message;
+            });
+        });
+
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            var resultText = document.getElementById('resultText');
+            resultText.select();
+            resultText.setSelectionRange(0, 99999); 
+            document.execCommand("copy");
+            alert("结果已复制到剪贴板");
+        });
+    </script>
+</body>
+</html>
