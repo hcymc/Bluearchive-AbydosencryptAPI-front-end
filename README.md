@@ -1,4 +1,4 @@
-```markdown
+
 # Bluearchive-AbydosencryptAPI 仓库介绍
 
 ## 概述
